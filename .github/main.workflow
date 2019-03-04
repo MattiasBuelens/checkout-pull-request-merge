@@ -5,5 +5,5 @@ workflow "Test on push" {
 
 action "Test" {
   uses = "actions/bin/sh@master"
-  args = "./test/test.sh"
+  args = ["chmod +x ./test/test.sh && ./test/test.sh"]
 }
