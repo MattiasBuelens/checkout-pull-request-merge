@@ -13,6 +13,12 @@ if [ $draft = "true" ]; then
   exit 78
 fi
 
+merged=$(jq --raw-output '.pull_request.merged' $GITHUB_EVENT_PATH)
+if [ $merged = "true" ]; then
+  echo "Skipping merged pull request."
+  exit 78
+fi
+
 merge_commit_sha=$(jq --raw-output '.pull_request.merge_commit_sha' $GITHUB_EVENT_PATH)
 if [ $merge_commit_sha = "null" ]; then
   echo "This pull request is not mergeable."
