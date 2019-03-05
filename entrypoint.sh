@@ -13,14 +13,10 @@ if [ $draft = "true" ]; then
   exit 78
 fi
 
-mergeable=$(jq --raw-output '.pull_request.mergeable' $GITHUB_EVENT_PATH)
-if [ $mergeable = "null" ]; then
-  echo "Skipping pull request with unknown mergeability."
-  exit 78
-elif [ $mergeable != "true" ]; then
+merge_commit_sha=$(jq --raw-output '.pull_request.merge_commit_sha' $GITHUB_EVENT_PATH)
+if [ $merge_commit_sha = "null" ]; then
   echo "This pull request is not mergeable."
   exit 1
 fi
 
-merge_commit_sha=$(jq --raw-output '.pull_request.merge_commit_sha' $GITHUB_EVENT_PATH)
 git checkout --force $merge_commit_sha
