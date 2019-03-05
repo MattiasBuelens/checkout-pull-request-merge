@@ -25,6 +25,7 @@ original_remote=$(git remote get-url origin)
 git remote set-url origin "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
 
 git fetch origin refs/pull/$pr_number/merge
-git checkout --force --recurse-submodules FETCH_HEAD
+git checkout --force FETCH_HEAD
+git submodule update --init
 
 git remote set-url origin $original_remote
