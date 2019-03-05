@@ -19,16 +19,12 @@ if [ $merged = "true" ]; then
   exit 78
 fi
 
-merge_commit_sha=$(jq --raw-output '.pull_request.merge_commit_sha' $GITHUB_EVENT_PATH)
-if [ $merge_commit_sha = "null" ]; then
-  echo "This pull request is not mergeable."
-  exit 1
-fi
+pr_number=$(jq --raw-output '.pull_request.number' $GITHUB_EVENT_PATH)
 
 original_remote=$(git remote get-url origin)
 git remote set-url origin "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
 
-git fetch origin $merge_commit_sha
-git checkout --force --recurse-submodules $merge_commit_sha
+git fetch origin refs/pull/$pr_number/merge
+git checkout --force --recurse-submodules FETCH_HEAD
 
 git remote set-url origin $original_remote
