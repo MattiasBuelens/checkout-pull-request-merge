@@ -25,5 +25,10 @@ if [ $merge_commit_sha = "null" ]; then
   exit 1
 fi
 
+original_remote=$(git remote get-url origin)
+git remote set-url origin "https://x-access-token:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+
 git fetch origin $merge_commit_sha
-git checkout --force FETCH_HEAD
+git checkout --force --recurse-submodules $merge_commit_sha
+
+git remote set-url origin $original_remote

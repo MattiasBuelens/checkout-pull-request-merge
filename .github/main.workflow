@@ -10,6 +10,7 @@ workflow "Test on pull request" {
 
 action "Checkout pull request merge" {
   uses = "./"
+  secrets = ["GITHUB_TOKEN"]
 }
 
 action "Test push" {
