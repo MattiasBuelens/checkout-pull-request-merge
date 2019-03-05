@@ -25,4 +25,5 @@ if [ $merge_commit_sha = "null" ]; then
   exit 1
 fi
 
-git checkout --force $merge_commit_sha
+git fetch origin $merge_commit_sha
+git checkout --force FETCH_HEAD
