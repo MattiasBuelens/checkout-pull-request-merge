@@ -8,13 +8,13 @@ if [ $GITHUB_EVENT_NAME != "pull_request" ]; then
 fi
 
 draft=$(jq --raw-output '.pull_request.draft' $GITHUB_EVENT_PATH)
-if [ $draft == "true" ]; then
+if [ $draft = "true" ]; then
   echo "Skipping draft pull request."
   exit 78
 fi
 
 mergeable=$(jq --raw-output '.pull_request.mergeable' $GITHUB_EVENT_PATH)
-if [ $mergeable == "null" ]; then
+if [ $mergeable = "null" ]; then
   echo "Skipping pull request with unknown mergeability."
   exit 78
 elif [ $mergeable != "true" ]; then
