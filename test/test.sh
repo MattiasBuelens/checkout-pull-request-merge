@@ -1,5 +1,5 @@
 #!/bin/sh -l
 
-echo "Hello"
+echo "Hi"
 echo "world!"
 echo "It works."
