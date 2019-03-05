@@ -9,5 +9,10 @@ LABEL "maintainer"="Mattias Buelens"
 LABEL "version"="0.0.1"
 LABEL "repository"="http://github.com/MattiasBuelens/checkout-pull-request-merge"
 
+RUN apt-get -y update \
+  && apt-get install -y git jq \
+  && rm -rf /var/lib/apt/lists/*
+
 ADD entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
