@@ -7,6 +7,12 @@ if [ $GITHUB_EVENT_NAME != "pull_request" ]; then
   exit 1
 fi
 
+pr_action=$(jq --raw-output '.action' $GITHUB_EVENT_PATH)
+if [ $pr_action != "opened" ] && [ $pr_action != "reopened" ] && [ $pr_action != "synchronize" ]; then
+  echo "Skipping pull request action: \"$pr_action\""
+  exit 78
+fi
+
 pr_draft=$(jq --raw-output '.pull_request.draft' $GITHUB_EVENT_PATH)
 if [ $pr_draft = "true" ]; then
   echo "Skipping draft pull request."
