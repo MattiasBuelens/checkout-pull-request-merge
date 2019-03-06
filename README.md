@@ -13,7 +13,7 @@ workflow "Pull request" {
   resolved = "Build pull request"
 }
 action "Checkout pull request merge" {
-  uses = "mattiasbuelens/checkout-pull-request-merge@v0.0.1"
+  uses = "MattiasBuelens/checkout-pull-request-merge@v0.0.1"
   secrets = ["GITHUB_TOKEN"]
 }
 action "Build pull request" {
