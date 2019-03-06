@@ -7,14 +7,14 @@ if [ $GITHUB_EVENT_NAME != "pull_request" ]; then
   exit 1
 fi
 
-draft=$(jq --raw-output '.pull_request.draft' $GITHUB_EVENT_PATH)
-if [ $draft = "true" ]; then
+pr_draft=$(jq --raw-output '.pull_request.draft' $GITHUB_EVENT_PATH)
+if [ $pr_draft = "true" ]; then
   echo "Skipping draft pull request."
   exit 78
 fi
 
-merged=$(jq --raw-output '.pull_request.merged' $GITHUB_EVENT_PATH)
-if [ $merged = "true" ]; then
+pr_merged=$(jq --raw-output '.pull_request.merged' $GITHUB_EVENT_PATH)
+if [ $pr_merged = "true" ]; then
   echo "Skipping merged pull request."
   exit 78
 fi
