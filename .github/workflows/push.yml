@@ -1,0 +1,12 @@
+name: Build on push
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out commit
+        uses: actions/checkout@v1
+      - name: Test
+        run: |
+          chmod +x ./test/test.sh
+          ./test/test.sh
