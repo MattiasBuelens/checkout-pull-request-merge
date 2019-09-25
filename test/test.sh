@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-echo "Hello"
+echo "Howdy"
 echo "world!"
 echo "It works."
 echo "Pull request changed this."
