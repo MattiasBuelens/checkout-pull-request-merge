@@ -3,4 +3,4 @@
 echo "Hello"
 echo "world!"
 echo "It works."
-echo "Pull request added this."
+echo "Pull request changed this."
